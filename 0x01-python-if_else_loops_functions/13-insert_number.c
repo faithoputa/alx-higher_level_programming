@@ -2,26 +2,54 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-listint_t *insert_node(listint_t **head, int number);
+/**
+ * insert_node - inserts a number into a singly linked list
+ * @head: double pointer to the list's head
+ * @number: number to be inserted
+ *
+ * Return: address of the new node, else, NULL
+ */
+listint_t *insert_node(listint_t **head, int number)
 {
-    listint_t *new_node = malloc(sizeof(listint_t));
-    if (!new_node)
-        return NULL;
+	listint_t *tem = *head, *new_node = NULL, *prev;
 
-    new_node->n = number;
-    new_node->next = NULL;
+	new_node = malloc(sizeof(listint_t));
+	if (!new_node)
+		return (NULL);
+	new_node->n = number;
 
-    if (!(*head) || (*head)->n >= number) {
-        new_node->next = *head;
-        *head = new_node;
-    } else {
-        listint_t *current = *head;
-        while (current->next && current->next->n < number) {
-            current = current->next;
-        }
-        new_node->next = current->next;
-        current->next = new_node;
-    }
+	if (!(*head))
+	       	/* if empty list*/
+	{
+		*head = new_node;
+		new_node->next = NULL;
+		return (new_node);
+	}
 
-    return new_node;
+	if ((*head)->n >= number) 
+		/* if insert at Beg. */
+	{
+		new_node->next = *head;
+		*head = new_node;
+	}
+	else
+	{
+		while (tem && (tem->n < number))
+		{
+			prev = tem;
+			tem = tem->next;
+		}
+		if (!tem) 
+			/* if insert at end */
+		{
+			prev->next = new_node;
+			new_node->next = NULL;
+		}
+		else
+		{
+			prev->next = new_node;
+			new_node->next = tem;
+		}
+	}
+	return (new_node);
 }
