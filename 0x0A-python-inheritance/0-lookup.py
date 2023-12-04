@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def lookup(obj):
     result = []
     for name, value in obj.__dict__.items():
