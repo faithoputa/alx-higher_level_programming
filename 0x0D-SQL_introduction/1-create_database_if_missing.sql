@@ -1,4 +1,2 @@
-#!/user/bin/sh
-CREATE DATABASE IF NOT EXISTS hbtn_0c_0;
-SELECT schema_name FROM information_schema.schemata;
-
+-- Creates the database hbtn_0c_0 in my MySQL server.
+CREATE DATABASE IF NOT EXISTS `hbtn_0c_0`;
